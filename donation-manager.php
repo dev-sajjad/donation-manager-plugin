@@ -135,7 +135,22 @@ final class Donation_Manager
 
     public function render_page()
     {
-        echo '<div id="donation-app"></div>'; // Vue.js mount point
+        try {
+            $formService = new \FluentForm\App\Services\Form\FormService();
+            // Assuming form ID for the donation form is available, use it to fetch the form.
+            $form = $formService->find($formId); // Replace $formId with the actual ID of your predefined donation form.
+
+            // Encode the form and pass it to Vue.js
+            $formJson = json_encode($form);
+
+            // Output the Vue.js mount point
+            echo '<div id="donation-app"></div>'; // Vue.js mount point
+
+            // Pass form data to Vue.js
+            echo "<script>var donationForm = $formJson;</script>";
+        } catch (Exception $e) {
+            echo __('Error loading donation form: ', 'fluentform') . $e->getMessage();
+        }
     }
 }
 

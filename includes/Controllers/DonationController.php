@@ -8,7 +8,11 @@ use FluentForm\App\Http\Controllers\Controller;
 
 class DonationController extends Controller
 {
-    // get donation and send through json
+    /**
+     * Display a listing of the resource.
+     * 
+     * @return \FluentForm\Framework\Response\Response
+     */
     public function index()
     {
         $donations = wpFluent()->table('fluentform_donations')->get();
@@ -18,6 +22,14 @@ class DonationController extends Controller
             200
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     * 
+     * @param \FluentForm\Framework\Request\Request $request
+     * 
+     * @return \FluentForm\Framework\Response\Response
+     */
 
     public function store()
     {
@@ -38,6 +50,14 @@ class DonationController extends Controller
         ]);
     }
 
+    /**
+     * Display the specified resource.
+     * 
+     * @param int $id
+     * 
+     * @return \FluentForm\Framework\Response\Response
+     */
+
     public function show($id)
     {
         $donation = wpFluent()->table('fluentform_donations')->where('id', $id)->first();
@@ -48,6 +68,14 @@ class DonationController extends Controller
         ]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     * 
+     * @param \FluentForm\Framework\Request\Request $request
+     * @param int $id
+     * 
+     * @return \FluentForm\Framework\Response\Response
+     */
     public function update($id)
     {
         wpFluent()->table('fluentform_donations')->where('id', $id)->update([
@@ -61,6 +89,13 @@ class DonationController extends Controller
         ]);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     * 
+     * @param int $id
+     * 
+     * @return \FluentForm\Framework\Response\Response
+     */
     public function destroy($id)
     {
         wpFluent()->table('fluentform_donations')->where('id', $id)->delete();
